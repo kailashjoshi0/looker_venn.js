@@ -34,6 +34,14 @@ looker.plugins.visualizations.add({
 			section: "Label",
 			order: 0
 		},
+		labelFont: {
+			label: "Label Font",
+			type: "string",
+			default: "sans-serif",
+			placeholder: "sans-serif",
+			section: "Label",
+			order: 0
+		},
 		labelColor: {
       			label: "Label Color",
       			type: "string",
@@ -149,7 +157,8 @@ looker.plugins.visualizations.add({
         	var colorArray = [config.circleColors[1], config.circleColors[2], config.circleColors[0], config.circleColors[3], config.circleColors[4], config.circleColors[5], config.circleColors[6], config.circleColors[7], config.circleColors[8], config.circleColors[9]];
 		var chart = venn.VennDiagram(colorArray,config.circleFactor)
 				.wrap(false)
-				.fontSize(config.labelSize);
+				.fontSize(config.labelSize)
+				.fontFamily(config.labelFont);
 		
 		//Draw the venn diagram
 		var div = d3.select("#venn")
@@ -163,6 +172,7 @@ looker.plugins.visualizations.add({
 		div.selectAll(".label")
 			.style("fill", config.labelColor)
 			.style("font-size", config.labelSize)
+			.style("font-family", config.labelFont)
 		div.selectAll(".venn-circle path").style("fill-opacity", config.circleOpacity);
 		
 		//Only include sublabels if the user chooses to in the viz options
